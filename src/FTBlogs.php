@@ -84,12 +84,15 @@ class Profiler
 
 		$eventTime = microtime(true);
 		$logData = $this->logData;
+
+		$logData['profile_id'] = $this->profileId;
 		$logData['event'] = $event;
 		$logData['event_id'] = $this->eventId++;
 		$logData['event_time'] = $eventTime;
 		$logData['last_event_duration'] = $eventTime - $this->lastEventTime;
 		$logData['profile_start'] = $this->startTime;
 		$logData['profile_duration'] = $eventTime - $this->startTime;
+
 		$this->lastEventTime = $eventTime;
 
 		$this->logger->log($this->logLevel, '', $logData);
