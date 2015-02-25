@@ -25,7 +25,7 @@ class Profiler
 	protected $logger;
 
 	/**
-	 * @var LogLevel
+	 * @var string
 	 */
 	protected $logLevel;
 
@@ -54,7 +54,7 @@ class Profiler
 	 */
 	protected $profileId;
 
-	public function __construct( Logger $logger, array $logData = array(), LogLevel $logLevel = LogLevel::INFO, $enabled = true )
+	public function __construct( Logger $logger, array $logData = array(), string $logLevel = LogLevel::INFO, $enabled = true )
 	{
 		$this->logger   = $logger;
 		$this->logData  = $logData;
