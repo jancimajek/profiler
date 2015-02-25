@@ -64,18 +64,18 @@ class Profiler
 		$this->start();
 	}
 
-	public function start()
+	public function start($event = 'profile-start')
 	{
 		$this->eventId = 0;
 		$this->startTime = $this->lastEventTime = microtime(true);
 		$this->profileId = md5(serialize(array_merge($this->logData, array('profile_start' => $this->startTime))));
 
-		$this->logEvent('profile-start');
+		$this->logEvent($event);
 	}
 
-	public function end()
+	public function end($event = 'profile-end')
 	{
-		$this->logEvent('profile-end');
+		$this->logEvent($event);
 	}
 
 	public function logEvent($event)
@@ -89,9 +89,13 @@ class Profiler
 		$logData['event'] = $event;
 		$logData['event_id'] = $this->eventId++;
 		$logData['event_time'] = $eventTime;
-		$logData['last_event_duration'] = $eventTime - $this->lastEventTime;
 		$logData['profile_start'] = $this->startTime;
-		$logData['profile_duration'] = $eventTime - $this->startTime;
+
+		// No duration for first event
+		if ($this->eventId > 1) {
+			$logData['last_event_duration'] = $eventTime - $this->lastEventTime;
+			$logData['profile_duration'] = $eventTime - $this->startTime;
+		}
 
 		$this->lastEventTime = $eventTime;
 
