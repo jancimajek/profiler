@@ -1,0 +1,24 @@
+{
+    "name": "ftblogs/profiler",
+    "description": "Profiling tool to help find bottlenecks in the application.",
+    "authors": [
+        {
+            "name": "Jan Majek",
+            "email": "jan.majek@ft.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FTBlogs\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://composer.labs.ft.com/"
+        }
+    ],
+    "require": {
+        "ftlabs/logger": "1.*"
+    }
+}
